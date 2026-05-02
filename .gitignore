@@ -1,0 +1,33 @@
+# 依存関係
+node_modules/
+.pnpm-store/
+
+# ビルド成果物
+dist/
+.next/
+.turbo/
+out/
+
+# 環境変数 (絶対にコミットしない)
+.env
+.env.local
+.env.*.local
+
+# Expo
+.expo/
+apps/mobile/.expo/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# テスト
+coverage/
+
+# Prisma
+packages/api/prisma/dev.db
+packages/api/prisma/dev.db-journal

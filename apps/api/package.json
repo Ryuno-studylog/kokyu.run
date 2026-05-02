@@ -1,0 +1,23 @@
+{
+  "name": "@kokyu/server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/index.ts",
+    "build": "echo 'No build step - tsx runs TypeScript directly'",
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.0",
+    "@kokyu/api": "workspace:*",
+    "@trpc/server": "^11.0.0",
+    "fastify": "^5.0.0",
+    "jose": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0"
+  }
+}

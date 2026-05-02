@@ -1,0 +1,25 @@
+{
+  "name": "kokyu-run",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "db:migrate": "pnpm --filter @kokyu/api db:migrate",
+    "db:migrate:deploy": "pnpm --filter @kokyu/api db:migrate:deploy",
+    "db:generate": "pnpm --filter @kokyu/api db:generate",
+    "db:seed": "pnpm --filter @kokyu/api db:seed",
+    "db:studio": "pnpm --filter @kokyu/api db:studio"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

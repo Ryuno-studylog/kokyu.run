@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  // directUrl はコネクションプーリング (Supabase Pooler) 使用時に追加
+}
+
+// ─── ユーザー ─────────────────────────────────────────────
+// id は Supabase auth.users.id (UUID) をそのまま使う
+model User {
+  id          String   @id
+  username    String?  @unique
+  displayName String?
+  createdAt   DateTime @default(now())
+
+  courses     Course[]
+  runs        Run[]
+
+  @@map("users")
+}
+
+// ─── コース ───────────────────────────────────────────────
+model Course {
+  id          String      @id @default(uuid())
+  createdById String
+  createdBy   User        @relation(fields: [createdById], references: [id], onDelete: Cascade)
+
+  name        String
+  description String?
+  distanceM   Int?        // メートル
+  difficulty  Difficulty?
+  startLat    Float?
+  startLng    Float?
+  endLat      Float?
+  endLng      Float?
+  // [[lng, lat], ...] の配列。Phase 4 で PostGIS geometry カラムに移行予定
+  coordinates Json?
+  tags        String[]
+
+  createdAt   DateTime    @default(now())
+
+  runs        Run[]
+
+  @@map("courses")
+}
+
+enum Difficulty {
+  easy
+  moderate
+  hard
+
+  @@map("difficulty")
+}
+
+// ─── 走行記録 ──────────────────────────────────────────────
+model Run {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId    String?
+  course      Course?  @relation(fields: [courseId], references: [id], onDelete: SetNull)
+
+  distanceM   Int      // メートル
+  durationS   Int      // 秒
+  // [[lng, lat], ...] の配列。Phase 4 で PostGIS geometry カラムに移行予定
+  coordinates Json?
+  startedAt   DateTime
+
+  createdAt   DateTime @default(now())
+
+  @@map("runs")
+}

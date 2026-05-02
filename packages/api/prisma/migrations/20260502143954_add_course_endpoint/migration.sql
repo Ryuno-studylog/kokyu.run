@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "courses" ADD COLUMN     "endLat" DOUBLE PRECISION,
+ADD COLUMN     "endLng" DOUBLE PRECISION;
