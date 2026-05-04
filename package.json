@@ -2,6 +2,7 @@
   "name": "kokyu-run",
   "private": true,
   "scripts": {
+    "start": "pnpm --filter @kokyu/server start",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
