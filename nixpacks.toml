@@ -4,8 +4,5 @@ nixPkgs = ["nodejs_20"]
 [phases.install]
 cmds = ["npm install -g pnpm@9", "pnpm install --frozen-lockfile"]
 
-[phases.build]
-cmds = ["pnpm --filter @kokyu/api db:generate"]
-
 [start]
 cmd = "pnpm --filter @kokyu/server start"
