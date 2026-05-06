@@ -4,6 +4,16 @@ import { api } from "@/lib/trpc-server"
 
 export const metadata: Metadata = { title: "コース一覧" }
 
+type CourseItem = {
+  id: string
+  name: string
+  description: string | null
+  distanceM: number | null
+  difficulty: "easy" | "moderate" | "hard" | null
+  tags: string[]
+  createdBy: { id: string; displayName: string | null; username: string | null }
+}
+
 const difficultyLabel: Record<string, string> = {
   easy: "初級",
   moderate: "中級",
@@ -16,7 +26,7 @@ const difficultyColor: Record<string, string> = {
 }
 
 export default async function CoursesPage() {
-  const { courses } = await api.courses.list.query({ limit: 50 })
+  const { courses } = await api.courses.list.query({ limit: 50 }) as unknown as { courses: CourseItem[] }
 
   return (
     <div className="space-y-6">
