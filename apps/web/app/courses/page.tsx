@@ -27,7 +27,13 @@ const difficultyColor: Record<string, string> = {
 }
 
 export default async function CoursesPage() {
-  const { courses } = await api.courses.list.query({ limit: 50 }) as unknown as { courses: CourseItem[] }
+  let courses: CourseItem[] = []
+  try {
+    const result = await api.courses.list.query({ limit: 50 }) as unknown as { courses: CourseItem[] }
+    courses = result.courses
+  } catch {
+    // API 接続失敗時は空リストで表示
+  }
 
   return (
     <div className="space-y-6">
