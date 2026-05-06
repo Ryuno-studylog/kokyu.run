@@ -6,7 +6,8 @@ import type { AppRouter } from "@kokyu/api"
 export const api = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: `${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001"}/trpc`,
+      // サーバーサイドは API_URL (内部通信可)、なければ NEXT_PUBLIC_API_URL にフォールバック
+      url: `${process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001"}/trpc`,
     }),
   ],
 })

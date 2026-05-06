@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { api } from "@/lib/trpc-server"
 
+export const dynamic = "force-dynamic"
 export const metadata: Metadata = { title: "コース一覧" }
 
 type CourseItem = {
