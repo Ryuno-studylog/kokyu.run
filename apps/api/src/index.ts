@@ -14,11 +14,12 @@ async function main() {
     },
   })
 
+  const allowedOrigins = process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(",").map((s) => s.trim())
+    : ["https://kokyu.run", "https://www.kokyu.run"]
+
   await server.register(cors, {
-    origin:
-      process.env.NODE_ENV === "production"
-        ? ["https://kokyu.run", "https://www.kokyu.run"]
-        : true,
+    origin: process.env.NODE_ENV === "production" ? allowedOrigins : true,
   })
 
   await server.register(fastifyTRPCPlugin, {

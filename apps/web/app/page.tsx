@@ -42,7 +42,7 @@ export default async function Home() {
       </section>
 
       {/* API ステータス (開発確認用) */}
-      {!apiOk && (
+      {!apiOk && process.env.NODE_ENV !== "production" && (
         <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           ⚠️ API に接続できません — <code>pnpm --filter @kokyu/server dev</code> を起動してください
         </div>
